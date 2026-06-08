@@ -1,0 +1,709 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS Speaking Prep</title>
+<style>
+:root{--bg:#0d1117;--sur:#161b22;--sur2:#21262d;--bdr:#30363d;--txt:#e6edf3;--dim:#8b949e;--acc:#f59e0b;--acc2:#fbbf24;--p1:#60a5fa;--p2:#c084fc;--p3:#34d399;--red:#f87171;--gold:#fbbf24;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--txt);min-height:100vh;font-family:'Segoe UI',system-ui,sans-serif;}
+.hdr{background:var(--sur);border-bottom:1px solid var(--bdr);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;}
+.hdr h1{font-size:16px;font-weight:700;}
+.badge{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#000;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px;}
+.sbar{background:var(--sur);border-bottom:1px solid var(--bdr);padding:8px 24px;display:none;align-items:center;gap:10px;font-size:12px;color:var(--dim);}
+.sbar.vis{display:flex;}
+.sdot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.screen{display:none;max-width:700px;margin:0 auto;padding:28px 18px 90px;}
+.screen.active{display:block;}
+.hero{text-align:center;padding:16px 0 28px;}
+.hero .ic{font-size:52px;margin-bottom:10px;}
+.hero h2{font-size:24px;font-weight:800;margin-bottom:8px;}
+.hero p{color:var(--dim);font-size:14px;line-height:1.6;max-width:460px;margin:0 auto;}
+.inp-wrap{margin:18px 0;}
+.inp-wrap label{display:block;font-size:12px;color:var(--dim);margin-bottom:6px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;}
+.inp-wrap input{width:100%;background:var(--sur);border:1.5px solid var(--bdr);border-radius:10px;color:var(--txt);font-size:15px;padding:12px 16px;outline:none;transition:border-color .2s;}
+.inp-wrap input:focus{border-color:var(--acc);}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 22px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;border:none;transition:all .2s;}
+.btn-primary{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#000;width:100%;}
+.btn-primary:hover{opacity:.9;transform:translateY(-1px);}
+.btn-sec{background:var(--sur2);color:var(--txt);border:1px solid var(--bdr);}
+.btn-sec:hover{border-color:var(--acc);}
+.btn-sm{padding:8px 14px;font-size:13px;}
+.ctrls{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;}
+.ctrls .btn{flex:1;min-width:110px;}
+.card{background:var(--sur);border:1px solid var(--bdr);border-radius:14px;padding:18px;margin-bottom:14px;}
+.ctitle-sm{font-size:12px;text-transform:uppercase;letter-spacing:.8px;font-weight:700;color:var(--dim);margin-bottom:8px;}
+.pbadge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;}
+.b1{background:rgba(96,165,250,.12);color:var(--p1);border:1px solid rgba(96,165,250,.25);}
+.b2{background:rgba(192,132,252,.12);color:var(--p2);border:1px solid rgba(192,132,252,.25);}
+.b3{background:rgba(52,211,153,.12);color:var(--p3);border:1px solid rgba(52,211,153,.25);}
+.part-row{background:var(--sur);border:1px solid var(--bdr);border-radius:14px;padding:16px;margin-bottom:10px;display:flex;gap:14px;align-items:flex-start;}
+.pnum{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:800;flex-shrink:0;}
+.n1{background:rgba(96,165,250,.14);color:var(--p1);}
+.n2{background:rgba(192,132,250,.14);color:var(--p2);}
+.n3{background:rgba(52,211,153,.14);color:var(--p3);}
+.pinfo h4{font-size:14px;font-weight:700;margin-bottom:4px;}
+.pinfo p{font-size:13px;color:var(--dim);line-height:1.5;}
+.topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin:14px 0;}
+.tcrd{background:var(--sur);border:1.5px solid var(--bdr);border-radius:12px;padding:14px 10px;text-align:center;cursor:pointer;transition:all .2s;}
+.tcrd:hover,.tcrd.sel{border-color:var(--p1);background:rgba(96,165,250,.07);}
+.tcrd .tic{font-size:24px;margin-bottom:5px;}
+.tcrd .tnm{font-size:12px;font-weight:700;}
+.ccrd{background:var(--sur);border:1.5px solid var(--bdr);border-radius:12px;padding:13px 16px;cursor:pointer;transition:all .2s;font-size:14px;font-weight:600;margin-bottom:8px;}
+.ccrd:hover,.ccrd.sel{border-color:var(--p2);background:rgba(192,132,252,.07);}
+.timer-wrap{position:relative;width:120px;height:120px;margin:0 auto 16px;}
+.timer-wrap svg{transform:rotate(-90deg);}
+.trk{fill:none;stroke:var(--bdr);stroke-width:8;}
+.tprog{fill:none;stroke:var(--acc);stroke-width:8;stroke-linecap:round;transition:stroke-dashoffset .5s;}
+.tnum{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:22px;font-weight:800;font-variant-numeric:tabular-nums;}
+.danger .tprog{stroke:var(--red)!important;}
+.danger .tnum{color:var(--red);}
+.phase{font-size:13px;color:var(--dim);text-align:center;margin-bottom:8px;text-transform:uppercase;letter-spacing:.8px;}
+.qdisplay{background:var(--sur2);border:1px solid var(--bdr);border-radius:14px;padding:22px;margin:14px 0;text-align:center;}
+.qlabel{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.qtext{font-size:19px;font-weight:700;line-height:1.45;}
+.cue-box{background:linear-gradient(135deg,#1e1b4b,#2e1065);border:2px solid var(--p2);border-radius:16px;padding:24px;margin:14px 0;}
+.cue-box h3{font-size:14px;color:var(--p2);margin-bottom:14px;font-weight:700;}
+.cue-box .ctask{font-size:17px;font-weight:700;margin-bottom:14px;line-height:1.4;}
+.cue-box ul{list-style:none;}
+.cue-box ul li{padding:4px 0;font-size:14px;color:var(--dim);}
+.cue-box ul li::before{content:"• ";color:var(--p2);font-weight:700;}
+.cue-box .cend{margin-top:12px;font-size:13px;color:var(--dim);font-style:italic;}
+.prog-bar{height:5px;background:var(--bdr);border-radius:10px;overflow:hidden;margin:10px 0 16px;}
+.prog-fill{height:100%;border-radius:10px;background:linear-gradient(90deg,var(--acc),var(--acc2));transition:width .4s;}
+.chk-item{background:var(--sur);border:1px solid var(--bdr);border-radius:10px;padding:11px 14px;margin-bottom:7px;display:flex;align-items:center;gap:11px;cursor:pointer;transition:all .2s;}
+.chk-item:hover{border-color:var(--acc);}
+.chk-item.on{border-color:var(--p3);background:rgba(52,211,153,.05);}
+.cmark{width:20px;height:20px;border:2px solid var(--bdr);border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;transition:all .2s;}
+.chk-item.on .cmark{background:var(--p3);border-color:var(--p3);color:#000;}
+.chk-item span{font-size:13px;line-height:1.4;}
+.model-box{background:rgba(96,165,250,.05);border:1px solid rgba(96,165,250,.2);border-radius:12px;padding:14px;margin:14px 0;}
+.model-box h4{font-size:11px;color:var(--p1);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-weight:700;}
+.model-box p{font-size:13px;color:var(--dim);line-height:1.7;}
+.p3model{background:rgba(52,211,153,.05)!important;border-color:rgba(52,211,153,.2)!important;}
+.p3model h4{color:var(--p3)!important;}
+.divider{height:1px;background:var(--bdr);margin:18px 0;}
+textarea{width:100%;background:transparent;border:none;color:var(--txt);font-size:14px;resize:none;outline:none;font-family:inherit;}
+.notes-wrap{background:var(--sur2);border:1px solid var(--bdr);border-radius:12px;padding:14px;margin:12px 0;}
+.notes-lbl{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.8px;font-weight:700;margin-bottom:7px;}
+.cert{background:linear-gradient(135deg,#0f172a,#1e1b4b);border:2px solid var(--gold);border-radius:20px;padding:32px 24px;text-align:center;margin:16px 0;}
+.corg{font-size:11px;color:var(--gold);text-transform:uppercase;letter-spacing:2px;margin-bottom:14px;}
+.ctitle-c{font-size:21px;font-weight:800;margin-bottom:4px;}
+.csub{font-size:13px;color:var(--dim);margin-bottom:18px;line-height:1.5;}
+.cname{font-size:26px;font-weight:800;color:var(--gold);margin-bottom:5px;}
+.cdate{font-size:13px;color:var(--dim);margin-bottom:18px;}
+.c-medal{font-size:46px;margin-bottom:10px;}
+.parts-done{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:16px 0;}
+.pdone{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:12px 18px;font-size:13px;text-align:center;}
+.pdone .pi{font-size:20px;margin-bottom:4px;}
+.next-steps{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:12px;padding:16px;margin:14px 0;text-align:left;}
+.next-steps h4{font-size:13px;color:var(--gold);margin-bottom:9px;}
+.next-steps li{padding:3px 0;font-size:13px;color:var(--dim);list-style:none;line-height:1.5;}
+.next-steps li::before{content:"✓ ";color:var(--p3);}
+.cfoot{font-size:11px;color:var(--dim);margin-top:18px;border-top:1px solid rgba(255,255,255,.08);padding-top:14px;}
+.tips-fab{position:fixed;bottom:20px;right:20px;width:48px;height:48px;border-radius:50%;background:var(--acc);color:#000;border:none;font-size:20px;cursor:pointer;box-shadow:0 4px 16px rgba(245,158,11,.35);z-index:40;display:none;align-items:center;justify-content:center;}
+.tips-fab.vis{display:flex;}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:60;align-items:flex-end;justify-content:center;}
+.modal.open{display:flex;}
+.mbox{background:var(--sur);border-radius:20px 20px 0 0;padding:22px;width:100%;max-width:700px;max-height:82vh;overflow-y:auto;}
+.mbox h3{font-size:17px;font-weight:800;margin-bottom:14px;}
+.mclose{float:right;background:var(--sur2);border:none;color:var(--txt);width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:14px;}
+.ph-sec{margin-bottom:18px;}
+.ph-sec h4{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.8px;margin-bottom:9px;font-weight:700;}
+.chips{display:flex;flex-wrap:wrap;gap:7px;}
+.chip{background:var(--sur2);border:1px solid var(--bdr);border-radius:20px;padding:5px 12px;font-size:13px;cursor:default;transition:all .2s;}
+.chip:hover{border-color:var(--acc);color:var(--acc);}
+.toast{position:fixed;bottom:78px;left:50%;transform:translateX(-50%) translateY(12px);background:var(--sur2);border:1px solid var(--bdr);color:var(--txt);padding:9px 18px;border-radius:20px;font-size:13px;opacity:0;transition:all .3s;z-index:90;white-space:nowrap;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.mini-parts{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0;}
+.mprt{flex:1;min-width:100px;padding:10px;border-radius:10px;text-align:center;font-size:12px;font-weight:700;}
+@media(max-width:480px){.topic-grid{grid-template-columns:1fr 1fr;}.hero h2{font-size:20px;}.qtext{font-size:16px;}}
+@media print{.hdr,.sbar,.tips-fab,.modal,.ctrls,.toast{display:none!important;}.cert{background:#fff;color:#000;border-color:#d97706;}.cert *{color:#000!important;}}
+</style>
+</head>
+<body>
+<div class="hdr">
+  <h1>🎤 IELTS Speaking Prep</h1>
+  <span class="badge" id="hBadge">HCT</span>
+</div>
+<div class="sbar" id="sbar">
+  <div class="sdot" id="sdot" style="background:var(--p1)"></div>
+  <span id="stxt">Part 1</span>
+</div>
+<div class="toast" id="toast"></div>
+<button class="tips-fab" id="tipsFab" onclick="openModal('tipsMod')" title="Tips & Phrases">💡</button>
+
+<!-- WELCOME -->
+<div class="screen active" id="sWelcome">
+  <div class="hero">
+    <div class="ic">🎤</div>
+    <h2>IELTS Speaking Prep</h2>
+    <p>Practise all three parts of the IELTS Speaking test. Build fluency, vocabulary, and confidence for Band 4.5–5.</p>
+  </div>
+  <div class="inp-wrap"><label>Your Full Name</label><input id="iName" type="text" placeholder="Enter your name..."/></div>
+  <div class="mini-parts">
+    <div class="mprt" style="background:rgba(96,165,250,.1);color:var(--p1);border:1px solid rgba(96,165,250,.2);">Part 1<br><span style="font-weight:400;color:var(--dim)">Personal Questions</span></div>
+    <div class="mprt" style="background:rgba(192,132,252,.1);color:var(--p2);border:1px solid rgba(192,132,252,.2);">Part 2<br><span style="font-weight:400;color:var(--dim)">Cue Card Talk</span></div>
+    <div class="mprt" style="background:rgba(52,211,153,.1);color:var(--p3);border:1px solid rgba(52,211,153,.2);">Part 3<br><span style="font-weight:400;color:var(--dim)">Discussion</span></div>
+  </div>
+  <button class="btn btn-primary" onclick="startApp()">🚀 Start Practice</button>
+  <div class="ctrls">
+    <button class="btn btn-sec btn-sm" onclick="loadProgress()">📂 Load Progress</button>
+    <button class="btn btn-sec btn-sm" onclick="resetAll()">🔄 Reset</button>
+  </div>
+  <p style="font-size:11px;color:var(--dim);text-align:center;margin-top:22px;">Designed by: Nazila Motahari &nbsp;·&nbsp; HCT English Department &nbsp;·&nbsp; Abu Dhabi</p>
+</div>
+
+<!-- OVERVIEW -->
+<div class="screen" id="sOverview">
+  <div class="pbadge b1">Test Overview</div>
+  <h2 style="font-size:22px;font-weight:800;margin-bottom:8px;">How the IELTS Speaking Test Works</h2>
+  <p style="color:var(--dim);font-size:14px;line-height:1.6;margin-bottom:18px;">The Speaking test is 11–14 minutes. There are three parts, each testing different speaking skills.</p>
+  <div class="part-row"><div class="pnum n1">1</div><div class="pinfo"><h4>Introduction & Interview (4–5 min)</h4><p>The examiner asks about familiar topics: family, home, studies, hobbies, and daily life. Give 2–3 sentence answers with a reason or example every time.</p></div></div>
+  <div class="part-row"><div class="pnum n2">2</div><div class="pinfo"><h4>Individual Long Turn (3–4 min)</h4><p>You get a cue card with a topic. You have 1 minute to prepare notes, then speak for 1–2 minutes. Cover all the bullet points on the card.</p></div></div>
+  <div class="part-row"><div class="pnum n3">3</div><div class="pinfo"><h4>Two-Way Discussion (4–5 min)</h4><p>More abstract questions linked to your Part 2 topic. Give extended answers with opinions, reasons, and examples. Aim for 3–5 sentences per answer.</p></div></div>
+  <div class="card" style="margin-top:6px;"><div class="ctitle-sm">🎯 Target for This Practice</div><p style="font-size:13px;color:var(--dim);line-height:1.6;margin-top:4px;">This app targets <strong style="color:var(--acc)">Band 4.5–5</strong>. Focus on complete sentences, giving reasons, and using varied vocabulary.</p></div>
+  <button class="btn btn-primary" style="margin-top:16px;" onclick="goTo('sP1Intro')">▶ Begin Part 1</button>
+</div>
+
+<!-- PART 1 INTRO -->
+<div class="screen" id="sP1Intro">
+  <div class="pbadge b1">Part 1 — Introduction & Interview</div>
+  <h2 style="font-size:21px;font-weight:800;margin-bottom:8px;">Choose a Topic</h2>
+  <p style="color:var(--dim);font-size:14px;line-height:1.6;margin-bottom:4px;">Select one topic. Answer <strong>5 questions</strong> on that topic. For each question, speak for at least <strong>30 seconds</strong> and give a reason or example.</p>
+  <div class="topic-grid" id="topicGrid"></div>
+  <div class="card"><div class="ctitle-sm">💡 Part 1 Tips</div>
+    <ul style="font-size:13px;color:var(--dim);line-height:2;padding-left:14px;">
+      <li>Never say just "Yes" or "No" — always extend your answer</li>
+      <li>Always add a reason: <em>"...because..."</em></li>
+      <li>Add an example: <em>"For example,..."</em></li>
+      <li>Speak at a natural, steady pace</li>
+    </ul>
+  </div>
+  <button class="btn btn-primary" style="margin-top:8px;" onclick="startP1()">▶ Start Part 1</button>
+</div>
+
+<!-- PART 1 QUESTION -->
+<div class="screen" id="sP1Q">
+  <div class="pbadge b1">Part 1 · <span id="p1prog">Question 1 of 5</span></div>
+  <div class="prog-bar"><div class="prog-fill" id="p1pf" style="width:20%"></div></div>
+  <div class="timer-wrap" id="t1">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle class="trk" cx="60" cy="60" r="52"/>
+      <circle class="tprog" id="r1" cx="60" cy="60" r="52" stroke-dasharray="326.7" stroke-dashoffset="0"/>
+    </svg>
+    <div class="tnum" id="n1">2:00</div>
+  </div>
+  <div class="phase" id="ph1">⏱ Speak now — time is running!</div>
+  <div class="qdisplay">
+    <div class="qlabel" id="ql1">QUESTION 1</div>
+    <div class="qtext" id="qt1">...</div>
+  </div>
+  <div id="p1after" style="display:none;">
+    <div class="divider"></div>
+    <p style="font-size:12px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px;">✅ Self-Check — How did you do?</p>
+    <div id="p1chks"></div>
+    <div class="model-box"><h4>💬 Key Phrases to Use</h4><p id="p1phrases"></p></div>
+    <div class="ctrls"><button class="btn btn-primary" id="p1nxt" onclick="nextP1()">Next Question →</button></div>
+  </div>
+  <div id="p1ctrls" style="margin-top:14px;">
+    <div class="ctrls">
+      <button class="btn btn-sec btn-sm" onclick="pauseT('p1')">⏸ Pause</button>
+      <button class="btn btn-sec btn-sm" onclick="skipT('p1')">⏭ Done Early</button>
+    </div>
+  </div>
+</div>
+
+<!-- PART 2 INTRO -->
+<div class="screen" id="sP2Intro">
+  <div class="pbadge b2">Part 2 — Individual Long Turn</div>
+  <h2 style="font-size:21px;font-weight:800;margin-bottom:8px;">Choose a Cue Card</h2>
+  <p style="color:var(--dim);font-size:14px;line-height:1.6;margin-bottom:4px;">Select a topic. You will have <strong>1 minute</strong> to prepare notes, then <strong>2 minutes</strong> to speak. Cover all the bullet points on your card.</p>
+  <div id="cueGrid" style="margin:14px 0;"></div>
+  <div class="card"><div class="ctitle-sm">💡 Part 2 Tips</div>
+    <ul style="font-size:13px;color:var(--dim);line-height:2;padding-left:14px;">
+      <li>Write <strong>key words only</strong> during prep time — not full sentences</li>
+      <li>Address every bullet point on the card</li>
+      <li>Keep speaking for the full 2 minutes — add feelings and details!</li>
+      <li>End with a personal comment or feeling about the topic</li>
+    </ul>
+  </div>
+  <button class="btn btn-primary" style="margin-top:8px;" onclick="startP2Prep()">▶ Start Part 2</button>
+</div>
+
+<!-- PART 2 PREP -->
+<div class="screen" id="sP2Prep">
+  <div class="pbadge b2">Part 2 · Preparation (1 min)</div>
+  <div class="phase">📝 Read the card and make notes below</div>
+  <div class="timer-wrap" id="tprep">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle class="trk" cx="60" cy="60" r="52"/>
+      <circle class="tprog" id="rprep" cx="60" cy="60" r="52" stroke-dasharray="326.7" stroke-dashoffset="0" style="stroke:var(--p2)"/>
+    </svg>
+    <div class="tnum" id="nprep">1:00</div>
+  </div>
+  <div id="cueCard1" class="cue-box"></div>
+  <div class="notes-wrap"><div class="notes-lbl">📝 My Notes (key words only)</div><textarea id="p2notes" rows="4" placeholder="Write key words here..."></textarea></div>
+  <button class="btn btn-primary" onclick="startP2Talk()">🎤 I'm Ready — Start Speaking</button>
+</div>
+
+<!-- PART 2 TALK -->
+<div class="screen" id="sP2Talk">
+  <div class="pbadge b2">Part 2 · Speaking (2 min)</div>
+  <div class="phase" id="ph2t">🎤 Speak now — tell your story!</div>
+  <div class="timer-wrap" id="ttalk">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle class="trk" cx="60" cy="60" r="52"/>
+      <circle class="tprog" id="rtalk" cx="60" cy="60" r="52" stroke-dasharray="326.7" stroke-dashoffset="0" style="stroke:var(--p2)"/>
+    </svg>
+    <div class="tnum" id="ntalk">2:00</div>
+  </div>
+  <div id="cueCard2" class="cue-box" style="opacity:.7;"></div>
+  <div id="p2after" style="display:none;">
+    <div class="divider"></div>
+    <p style="font-size:12px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px;">✅ Self-Check — How did you do?</p>
+    <div id="p2chks"></div>
+    <div class="ctrls"><button class="btn btn-primary" onclick="goTo('sP3Intro')">Go to Part 3 →</button></div>
+  </div>
+  <div id="p2ctrls" style="margin-top:14px;">
+    <div class="ctrls">
+      <button class="btn btn-sec btn-sm" onclick="pauseT('p2t')">⏸ Pause</button>
+      <button class="btn btn-sec btn-sm" onclick="skipT('p2t')">⏭ Done Early</button>
+    </div>
+  </div>
+</div>
+
+<!-- PART 3 INTRO -->
+<div class="screen" id="sP3Intro">
+  <div class="pbadge b3">Part 3 — Two-Way Discussion</div>
+  <h2 style="font-size:21px;font-weight:800;margin-bottom:8px;">Discussion Questions</h2>
+  <p style="color:var(--dim);font-size:14px;line-height:1.6;margin-bottom:14px;">Answer <strong>4 discussion questions</strong> linked to your Part 2 topic. These are more abstract — give opinions about society and ideas. Aim for <strong>3–5 sentences</strong> per answer.</p>
+  <div class="card"><div class="ctitle-sm">💡 Part 3 Tips</div>
+    <ul style="font-size:13px;color:var(--dim);line-height:2;padding-left:14px;">
+      <li>Give your <strong>opinion</strong>: <em>"I think... / In my opinion..."</em></li>
+      <li>Explain <strong>why</strong>: <em>"This is because... / The main reason is..."</em></li>
+      <li>Consider both sides: <em>"On the other hand..."</em></li>
+      <li>Don't be afraid to disagree — just justify your view!</li>
+      <li>Speak for at least <strong>45 seconds</strong> per question</li>
+    </ul>
+  </div>
+  <button class="btn btn-primary" style="margin-top:8px;" onclick="startP3()">▶ Start Part 3</button>
+</div>
+
+<!-- PART 3 QUESTION -->
+<div class="screen" id="sP3Q">
+  <div class="pbadge b3">Part 3 · <span id="p3prog">Question 1 of 4</span></div>
+  <div class="prog-bar"><div class="prog-fill" id="p3pf" style="width:25%;background:linear-gradient(90deg,var(--p3),#6ee7b7)"></div></div>
+  <div class="timer-wrap" id="t3">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle class="trk" cx="60" cy="60" r="52"/>
+      <circle class="tprog" id="r3" cx="60" cy="60" r="52" stroke-dasharray="326.7" stroke-dashoffset="0" style="stroke:var(--p3)"/>
+    </svg>
+    <div class="tnum" id="n3">3:00</div>
+  </div>
+  <div class="phase" id="ph3">💬 Discuss your ideas — give reasons!</div>
+  <div class="qdisplay">
+    <div class="qlabel" id="ql3">QUESTION 1</div>
+    <div class="qtext" id="qt3">...</div>
+  </div>
+  <div id="p3after" style="display:none;">
+    <div class="divider"></div>
+    <p style="font-size:12px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px;">✅ Self-Check — How did you do?</p>
+    <div id="p3chks"></div>
+    <div class="model-box p3model"><h4>💬 Useful Language</h4><p id="p3phrases"></p></div>
+    <div class="ctrls"><button class="btn btn-primary" id="p3nxt" onclick="nextP3()">Next Question →</button></div>
+  </div>
+  <div id="p3ctrls" style="margin-top:14px;">
+    <div class="ctrls">
+      <button class="btn btn-sec btn-sm" onclick="pauseT('p3')">⏸ Pause</button>
+      <button class="btn btn-sec btn-sm" onclick="skipT('p3')">⏭ Done Early</button>
+    </div>
+  </div>
+</div>
+
+<!-- CERTIFICATE -->
+<div class="screen" id="sCert">
+  <div id="certArea"></div>
+  <div class="ctrls">
+    <button class="btn btn-sec" onclick="window.print()">🖨 Print</button>
+    <button class="btn btn-sec" onclick="practiceAgain()">🔁 Practice Again</button>
+  </div>
+  <div class="ctrls">
+    <button class="btn btn-sec" onclick="saveProgress()">💾 Save Progress</button>
+  </div>
+</div>
+
+<!-- TIPS MODAL -->
+<div class="modal" id="tipsMod" onclick="closeOut(event,'tipsMod')">
+  <div class="mbox">
+    <button class="mclose" onclick="closeModal('tipsMod')">✕</button>
+    <h3>💡 Tips & Language Bank</h3>
+    <div class="ph-sec"><h4>🗣 Giving Opinions</h4><div class="chips"><div class="chip">In my opinion...</div><div class="chip">Personally, I think...</div><div class="chip">From my point of view...</div><div class="chip">I believe that...</div><div class="chip">As far as I'm concerned...</div></div></div>
+    <div class="ph-sec"><h4>💡 Giving Reasons</h4><div class="chips"><div class="chip">This is because...</div><div class="chip">The main reason is...</div><div class="chip">One reason for this is...</div><div class="chip">This is mainly due to...</div></div></div>
+    <div class="ph-sec"><h4>📌 Giving Examples</h4><div class="chips"><div class="chip">For example,...</div><div class="chip">For instance,...</div><div class="chip">A good example is...</div><div class="chip">To illustrate this,...</div></div></div>
+    <div class="ph-sec"><h4>➕ Extending Your Answer</h4><div class="chips"><div class="chip">Not only that, but...</div><div class="chip">What's more,...</div><div class="chip">In addition to this,...</div><div class="chip">Another point is...</div></div></div>
+    <div class="ph-sec"><h4>🔄 Giving Both Sides</h4><div class="chips"><div class="chip">On the other hand,...</div><div class="chip">However,...</div><div class="chip">Although some people think...</div><div class="chip">While I understand that...</div></div></div>
+    <div class="ph-sec"><h4>⏳ Buying Thinking Time</h4><div class="chips"><div class="chip">That's an interesting question...</div><div class="chip">Let me think about that...</div><div class="chip">Well, I suppose...</div><div class="chip">It's difficult to say, but...</div></div></div>
+    <button class="btn btn-sec" style="width:100%;margin-top:6px;" onclick="closeModal('tipsMod')">Close</button>
+  </div>
+</div>
+
+<script>
+// ── DATA ─────────────────────────────────────────
+const TOPICS=[
+  {id:'work',icon:'💼',name:'Work & Studies',qs:[
+    'What do you do — are you working or studying?',
+    'Do you enjoy your studies? Why or why not?',
+    'What is the most interesting subject you study, and why?',
+    'What do you hope to do after you finish your studies?',
+    'Is your college or workplace a nice place to be? Why?'
+  ],phrases:[
+    'I\'m currently studying... because I want to...',
+    'My favourite subject is... mainly because...',
+    'In the future, I hope to... since...',
+    'I find it... (interesting / challenging / rewarding) because...'
+  ]},
+  {id:'home',icon:'🏠',name:'Home & Daily Life',qs:[
+    'Where do you live? Do you like living there?',
+    'What do you usually do in the evenings after college?',
+    'Do you prefer spending time at home or going out? Why?',
+    'What is your neighbourhood like?',
+    'Have you always lived in the same city, or have you moved before?'
+  ],phrases:[
+    'I live in... which is a... kind of area.',
+    'In my free time, I usually... because...',
+    'I prefer... mainly because it makes me feel...',
+    'My neighbourhood has... which I really enjoy.'
+  ]},
+  {id:'hobbies',icon:'🎨',name:'Hobbies & Free Time',qs:[
+    'What do you like to do in your free time?',
+    'How long have you had this hobby? How did you start?',
+    'Do you prefer indoor or outdoor activities? Why?',
+    'How much time do you spend on your hobby each week?',
+    'Would you like to try any new hobbies in the future?'
+  ],phrases:[
+    'In my free time, I enjoy... because it helps me...',
+    'I have been doing this for... years. I started because...',
+    'I prefer... activities because...',
+    'In the future, I\'d love to try... since...'
+  ]},
+  {id:'food',icon:'🍽️',name:'Food & Cooking',qs:[
+    'What kind of food do you enjoy eating most?',
+    'Do you prefer home-cooked meals or eating out? Why?',
+    'Can you cook? What do you usually make?',
+    'Is food an important part of your culture or family life?',
+    'Have you ever tried food from a different country? What was it like?'
+  ],phrases:[
+    'My favourite food is... because it tastes...',
+    'I prefer... because it is usually... than...',
+    'In my culture, food is important because...',
+    'I once tried... and I thought it was... because...'
+  ]},
+  {id:'tech',icon:'📱',name:'Technology',qs:[
+    'How often do you use your phone or computer during the day?',
+    'What apps do you use most often, and why?',
+    'Do you prefer face-to-face communication or messaging? Why?',
+    'How do you think technology has changed people\'s daily lives?',
+    'Do you think young people use technology too much? Why?'
+  ],phrases:[
+    'I use my phone mainly to... because...',
+    'My favourite app is... since it allows me to...',
+    'I prefer... communication because...',
+    'Technology has changed daily life by... which means...'
+  ]}
+];
+
+const CARDS=[
+  {id:'person',title:'A Person You Admire',task:'Describe a person you admire.',
+   bullets:['Who this person is','How you know them','What they have done'],end:'And explain why you admire this person.',
+   p3qs:['Why do you think it is important to have people we admire in life?','Do young people today have different role models compared to the past?','Do you think famous people should be responsible for how they behave in public?','How can admiring someone help a person achieve their own goals?'],
+   p3p:['Role models are important because they show us...','In the past, people admired... However, today...','I believe famous people should... because they influence...','When we admire someone, it motivates us to...']},
+  {id:'place',title:'A Place You Enjoy Visiting',task:'Describe a place you enjoy visiting.',
+   bullets:['Where this place is','When you usually go there','What you do there'],end:'And explain why you enjoy going to this place.',
+   p3qs:['Why do you think people enjoy visiting new places?','Has tourism changed in your country in recent years? How?','Do you think too much tourism can damage a place? Why?','What makes a city or town a popular place to visit?'],
+   p3p:['People enjoy visiting new places because...','Tourism has changed because... which means...','Too much tourism can cause problems such as...','A popular destination usually has... which attracts...']},
+  {id:'hobby',title:'A Hobby or Activity You Enjoy',task:'Describe a hobby or activity you enjoy.',
+   bullets:['What the activity is','When you started doing it','How often you do it'],end:'And explain why you enjoy this activity so much.',
+   p3qs:['Why is it important for people to have hobbies?','Do you think people today have enough free time for hobbies?','How do hobbies change as people get older?','Is it better to have one hobby or many different hobbies? Why?'],
+   p3p:['Hobbies are important because they allow people to...','In today\'s busy world, many people find it difficult to...','As people get older, their hobbies often change because...','Having one hobby means... whereas many different hobbies...']},
+  {id:'event',title:'A Memorable Event or Celebration',task:'Describe a memorable event or celebration you attended.',
+   bullets:['What the event was','When and where it happened','Who was there'],end:'And explain why this event was so memorable for you.',
+   p3qs:['Why are celebrations and special events important in society?','How have celebrations in your country changed over the years?','Do you think traditional celebrations should be preserved? Why?','How do celebrations help bring communities together?'],
+   p3p:['Celebrations are important because they bring people together and...','In recent years, celebrations have changed because...','Traditional celebrations should be preserved since...','Events like this help communities by...']},
+  {id:'skill',title:'Something You Are Good At',task:'Describe something you are good at.',
+   bullets:['What it is','How and when you learned to do it','How often you use or practise it'],end:'And explain why you think you are good at it.',
+   p3qs:['Why is it important for people to develop different skills?','Do you think schools do enough to help students develop practical skills?','Is natural talent or hard work more important when developing a skill?','How can people continue to develop skills throughout their life?'],
+   p3p:['Developing skills is important because...','Schools could do more by... For example...','In my opinion, hard work is more important than natural talent because...','People can keep developing skills by... such as...']}
+];
+
+const CHK1=['I answered the question directly','I gave at least one reason (because...)','I gave an example or extra detail','I spoke in full, complete sentences','I spoke for at least 30 seconds'];
+const CHK2=['I covered all bullet points on the card','I spoke for close to 2 minutes','I used descriptive language (adjectives, adverbs)','I added personal feelings or opinions','I finished with a clear concluding comment'];
+const CHK3=['I gave my opinion clearly','I explained my reasons','I gave an example or referred to society','I spoke for at least 45 seconds','I used a variety of vocabulary'];
+
+// ── STATE ────────────────────────────────────────
+let S={name:'',topic:null,card:null,p1i:0,p3i:0,p1done:false,p2done:false,p3done:false,iv:null,tsecs:0,paused:false,act:null};
+
+// ── NAVIGATION ───────────────────────────────────
+function goTo(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+  updateBar(id);
+}
+function updateBar(id){
+  const bar=document.getElementById('sbar'),dot=document.getElementById('sdot'),txt=document.getElementById('stxt'),fab=document.getElementById('tipsFab');
+  if(id==='sWelcome'||id==='sOverview'){bar.classList.remove('vis');fab.classList.remove('vis');return;}
+  bar.classList.add('vis');fab.classList.add('vis');
+  if(id.includes('P1')){dot.style.background='var(--p1)';txt.textContent=S.name+' · Part 1 — Interview';}
+  else if(id.includes('P2')){dot.style.background='var(--p2)';txt.textContent=S.name+' · Part 2 — Cue Card';}
+  else if(id.includes('P3')){dot.style.background='var(--p3)';txt.textContent=S.name+' · Part 3 — Discussion';}
+  else if(id==='sCert'){dot.style.background='var(--gold)';txt.textContent=S.name+' · Complete! 🎉';}
+}
+
+// ── WELCOME ──────────────────────────────────────
+function startApp(){
+  const n=document.getElementById('iName').value.trim();
+  if(!n){toast('⚠️ Please enter your name first.');return;}
+  S.name=n;
+  buildTopics();buildCards();
+  goTo('sOverview');
+}
+
+// ── TOPICS ───────────────────────────────────────
+function buildTopics(){
+  const g=document.getElementById('topicGrid');
+  g.innerHTML=TOPICS.map(t=>`<div class="tcrd" id="tc_${t.id}" onclick="selTopic('${t.id}')"><div class="tic">${t.icon}</div><div class="tnm">${t.name}</div></div>`).join('');
+  selTopic(TOPICS[0].id);
+}
+function selTopic(id){
+  S.topic=TOPICS.find(t=>t.id===id);
+  document.querySelectorAll('.tcrd').forEach(c=>c.classList.remove('sel'));
+  document.getElementById('tc_'+id)?.classList.add('sel');
+}
+
+// ── CARDS ────────────────────────────────────────
+function buildCards(){
+  const g=document.getElementById('cueGrid');
+  g.innerHTML=CARDS.map(c=>`<div class="ccrd" id="cc_${c.id}" onclick="selCard('${c.id}')">🃏 ${c.title}</div>`).join('');
+  selCard(CARDS[0].id);
+}
+function selCard(id){
+  S.card=CARDS.find(c=>c.id===id);
+  document.querySelectorAll('.ccrd').forEach(c=>c.classList.remove('sel'));
+  document.getElementById('cc_'+id)?.classList.add('sel');
+}
+function renderCard(el){
+  const c=S.card;
+  el.innerHTML=`<h3>🃏 Cue Card</h3><div class="ctask">${c.task}</div><p style="font-size:12px;color:var(--p2);margin-bottom:9px;font-weight:700;">You should say:</p><ul>${c.bullets.map(b=>`<li>${b}</li>`).join('')}</ul><p class="cend">${c.end}</p>`;
+}
+
+// ── PART 1 ───────────────────────────────────────
+function startP1(){
+  if(!S.topic){toast('⚠️ Please select a topic first.');return;}
+  S.p1i=0;goTo('sP1Q');loadP1Q();
+}
+function loadP1Q(){
+  const q=S.topic.qs[S.p1i],num=S.p1i+1;
+  document.getElementById('p1prog').textContent=`Question ${num} of 5`;
+  document.getElementById('ql1').textContent=`QUESTION ${num}`;
+  document.getElementById('qt1').textContent=q;
+  document.getElementById('p1pf').style.width=(num/5*100)+'%';
+  document.getElementById('p1after').style.display='none';
+  document.getElementById('p1ctrls').style.display='block';
+  document.getElementById('ph1').textContent='⏱ Speak now — time is running!';
+  document.getElementById('t1').classList.remove('danger');
+  startT('p1',120);
+}
+function nextP1(){
+  stopT();S.p1i++;
+  if(S.p1i>=5){S.p1done=true;toast('✅ Part 1 Complete! Well done!');autoSave();goTo('sP2Intro');}
+  else loadP1Q();
+}
+
+// ── PART 2 ───────────────────────────────────────
+function startP2Prep(){
+  if(!S.card){toast('⚠️ Please select a cue card.');return;}
+  renderCard(document.getElementById('cueCard1'));
+  renderCard(document.getElementById('cueCard2'));
+  document.getElementById('p2notes').value='';
+  goTo('sP2Prep');startT('p2p',60);
+}
+function startP2Talk(){
+  stopT();goTo('sP2Talk');
+  document.getElementById('p2after').style.display='none';
+  document.getElementById('p2ctrls').style.display='block';
+  document.getElementById('ph2t').textContent='🎤 Speak now — tell your story!';
+  document.getElementById('ttalk').classList.remove('danger');
+  startT('p2t',120);
+}
+
+// ── PART 3 ───────────────────────────────────────
+function startP3(){
+  S.p3i=0;goTo('sP3Q');loadP3Q();
+}
+function loadP3Q(){
+  const q=S.card.p3qs[S.p3i],num=S.p3i+1;
+  document.getElementById('p3prog').textContent=`Question ${num} of 4`;
+  document.getElementById('ql3').textContent=`QUESTION ${num}`;
+  document.getElementById('qt3').textContent=q;
+  document.getElementById('p3pf').style.width=(num/4*100)+'%';
+  document.getElementById('p3after').style.display='none';
+  document.getElementById('p3ctrls').style.display='block';
+  document.getElementById('ph3').textContent='💬 Discuss your ideas — give reasons!';
+  document.getElementById('t3').classList.remove('danger');
+  startT('p3',180);
+}
+function nextP3(){
+  stopT();S.p3i++;
+  if(S.p3i>=4){S.p3done=true;autoSave();buildCert();goTo('sCert');toast('🎉 Congratulations — all three parts complete!');}
+  else loadP3Q();
+}
+
+// ── TIMER ────────────────────────────────────────
+function startT(which,secs){
+  stopT();S.act=which;S.tsecs=secs;S.paused=false;
+  renderT(which,secs,secs);
+  S.iv=setInterval(()=>{
+    if(S.paused)return;S.tsecs--;renderT(which,S.tsecs,secs);
+    if(S.tsecs<=0){stopT();onEnd(which);}
+  },1000);
+}
+function stopT(){if(S.iv){clearInterval(S.iv);S.iv=null;}}
+function pauseT(w){
+  S.paused=!S.paused;
+  document.querySelectorAll('[onclick^="pauseT"]').forEach(b=>b.textContent=S.paused?'▶ Resume':'⏸ Pause');
+}
+function skipT(w){stopT();onEnd(w);}
+function renderT(w,rem,tot){
+  const off=326.7*(1-rem/tot),m=Math.floor(rem/60),s=rem%60,str=`${m}:${String(s).padStart(2,'0')}`;
+  if(w==='p1'){document.getElementById('r1').style.strokeDashoffset=off;document.getElementById('n1').textContent=str;if(rem<=30)document.getElementById('t1').classList.add('danger');}
+  else if(w==='p2p'){document.getElementById('rprep').style.strokeDashoffset=off;document.getElementById('nprep').textContent=str;if(rem<=15)document.getElementById('tprep').classList.add('danger');}
+  else if(w==='p2t'){document.getElementById('rtalk').style.strokeDashoffset=off;document.getElementById('ntalk').textContent=str;if(rem<=30)document.getElementById('ttalk').classList.add('danger');}
+  else if(w==='p3'){document.getElementById('r3').style.strokeDashoffset=off;document.getElementById('n3').textContent=str;if(rem<=45)document.getElementById('t3').classList.add('danger');}
+}
+function onEnd(w){
+  if(w==='p1'){
+    document.getElementById('ph1').textContent='✅ Time\'s up! Check yourself below.';
+    document.getElementById('p1ctrls').style.display='none';
+    buildChks('p1chks','p1',CHK1);
+    document.getElementById('p1phrases').innerHTML=S.topic.phrases.map(p=>`✦ <em>${p}</em>`).join('<br>');
+    document.getElementById('p1after').style.display='block';
+    scroll2('p1after');
+    if(S.p1i===4)document.getElementById('p1nxt').textContent='Finish Part 1 →';
+  }else if(w==='p2p'){toast('⏰ Prep time up — get ready to speak!');startP2Talk();}
+  else if(w==='p2t'){
+    document.getElementById('ph2t').textContent='✅ Time\'s up! Check yourself below.';
+    document.getElementById('p2ctrls').style.display='none';
+    buildChks('p2chks','p2',CHK2);
+    document.getElementById('p2after').style.display='block';
+    scroll2('p2after');
+  }else if(w==='p3'){
+    document.getElementById('ph3').textContent='✅ Time\'s up! Check yourself below.';
+    document.getElementById('p3ctrls').style.display='none';
+    buildChks('p3chks','p3',CHK3);
+    document.getElementById('p3phrases').innerHTML=S.card.p3p.map(p=>`✦ <em>${p}</em>`).join('<br>');
+    document.getElementById('p3after').style.display='block';
+    scroll2('p3after');
+    if(S.p3i===3)document.getElementById('p3nxt').textContent='View Certificate →';
+  }
+}
+
+// ── SELF CHECK ───────────────────────────────────
+function buildChks(cid,prefix,items){
+  document.getElementById(cid).innerHTML=items.map((c,i)=>`
+    <div class="chk-item" id="${prefix}ci${i}" onclick="togChk('${prefix}',${i})">
+      <div class="cmark" id="${prefix}cm${i}"></div><span>${c}</span>
+    </div>`).join('');
+}
+function togChk(p,i){
+  const item=document.getElementById(p+'ci'+i),mark=document.getElementById(p+'cm'+i);
+  item.classList.toggle('on');mark.textContent=item.classList.contains('on')?'✓':'';
+}
+function scroll2(id){setTimeout(()=>window.scrollTo({top:document.getElementById(id).offsetTop-80,behavior:'smooth'}),100);}
+
+// ── CERTIFICATE ──────────────────────────────────
+function buildCert(){
+  const date=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+  const tips=[
+    'Record yourself speaking and listen back — notice where you hesitate or repeat words.',
+    'Practise giving extended answers (3–4 sentences) with reasons and examples every day.',
+    'Read English articles and write down 5 new words you can use in speaking.',
+    'Watch IELTS Speaking Band 5 example videos online and compare your responses.',
+    'Practise Part 2 cue cards with a 2-minute timer every day — aim for all bullet points.',
+    'Focus on using a variety of sentence structures, not only simple sentences.'
+  ];
+  document.getElementById('certArea').innerHTML=`
+  <div class="cert">
+    <p class="corg">Higher Colleges of Technology &nbsp;·&nbsp; Abu Dhabi</p>
+    <div class="c-medal">🎤</div>
+    <h2 class="ctitle-c">IELTS Speaking Practice</h2>
+    <p class="ctitle-c" style="font-size:17px;color:var(--gold);font-weight:700;margin-top:4px;">Certificate of Completion</p>
+    <p class="csub">This certifies that the following student has completed<br>all three parts of the IELTS Speaking Preparation</p>
+    <h3 class="cname">${S.name}</h3>
+    <p class="cdate">Completed on: ${date}</p>
+    <div class="parts-done">
+      <div class="pdone"><div class="pi" style="color:var(--p1)">🗣</div>Part 1<br><span style="font-size:11px;color:var(--dim)">Interview</span></div>
+      <div class="pdone"><div class="pi" style="color:var(--p2)">🃏</div>Part 2<br><span style="font-size:11px;color:var(--dim)">Cue Card</span></div>
+      <div class="pdone"><div class="pi" style="color:var(--p3)">💬</div>Part 3<br><span style="font-size:11px;color:var(--dim)">Discussion</span></div>
+    </div>
+    <p style="font-size:13px;color:var(--dim);margin-bottom:14px;">Topic: <strong style="color:var(--txt)">${S.topic.name}</strong> &nbsp;·&nbsp; Card: <strong style="color:var(--txt)">${S.card.title}</strong></p>
+    <div class="next-steps">
+      <h4>📋 Your Next Steps — Towards Band 5</h4>
+      <ul>${tips.map(t=>`<li>${t}</li>`).join('')}</ul>
+    </div>
+    <p class="cfoot">Designed by: Nazila Motahari &nbsp;·&nbsp; HCT English Department &nbsp;·&nbsp; Abu Dhabi</p>
+  </div>`;
+}
+
+// ── MODALS ───────────────────────────────────────
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+function closeOut(e,id){if(e.target.id===id)closeModal(id);}
+
+// ── TOAST ────────────────────────────────────────
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3200);}
+
+// ── SAVE / LOAD / RESET ──────────────────────────
+function saveProgress(){
+  const d={name:S.name,topicId:S.topic?.id,cardId:S.card?.id,p1i:S.p1i,p3i:S.p3i,p1done:S.p1done,p2done:S.p2done,p3done:S.p3done,ts:new Date().toISOString()};
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([JSON.stringify(d)],{type:'application/json'}));
+  a.download=`ielts_speaking_${S.name.replace(/\s+/g,'_')}.json`;a.click();
+  toast('💾 Progress saved!');
+}
+function autoSave(){try{localStorage.setItem('ielts_spk_as',JSON.stringify({name:S.name,topicId:S.topic?.id,cardId:S.card?.id,p1done:S.p1done,p2done:S.p2done,p3done:S.p3done}));}catch(e){}}
+function loadProgress(){
+  const inp=document.createElement('input');inp.type='file';inp.accept='.json';
+  inp.onchange=e=>{
+    const f=e.target.files[0];if(!f)return;
+    const r=new FileReader();
+    r.onload=ev=>{
+      try{
+        const d=JSON.parse(ev.target.result);
+        S.name=d.name;document.getElementById('iName').value=d.name;
+        if(d.topicId){S.topic=TOPICS.find(t=>t.id===d.topicId);}
+        if(d.cardId){S.card=CARDS.find(c=>c.id===d.cardId);}
+        S.p1done=d.p1done;S.p2done=d.p2done;S.p3done=d.p3done;
+        buildTopics();buildCards();
+        if(d.topicId)selTopic(d.topicId);
+        if(d.cardId)selCard(d.cardId);
+        toast(`✅ Progress loaded for ${d.name}!`);
+      }catch(err){toast('❌ Could not read save file.');}
+    };r.readAsText(f);
+  };inp.click();
+}
+function resetAll(){
+  if(!confirm('Reset all progress? This cannot be undone.'))return;
+  stopT();
+  S={name:'',topic:null,card:null,p1i:0,p3i:0,p1done:false,p2done:false,p3done:false,iv:null,tsecs:0,paused:false,act:null};
+  document.getElementById('iName').value='';
+  goTo('sWelcome');toast('🔄 Reset complete.');
+}
+function practiceAgain(){
+  S.p1i=0;S.p3i=0;S.p1done=false;S.p2done=false;S.p3done=false;
+  goTo('sOverview');
+}
+</script>
+</body>
+</html>
